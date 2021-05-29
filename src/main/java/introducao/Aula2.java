@@ -5,6 +5,8 @@
  */
 package introducao;
 
+import java.util.Scanner;
+
 /**
  *
  * @author samuk159
@@ -78,7 +80,6 @@ public class Aula2 {
         System.out.println(var7.toUpperCase());
         System.out.println(var7.replace("Isso", "Isto"));
         
-        //if, switch, for, while, do while
         if (var1) {
             System.out.println("var1 é verdadeira");
         } else if (var2 > 10) {
@@ -130,6 +131,33 @@ public class Aula2 {
             System.out.println(a);
             a--;
         } while (a > 0);
+        
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Qual seu nome:");
+        String nome = scanner.nextLine();
+        System.out.println("Seu nome é " + nome);
+        
+        System.out.println("Qual sua idade:");
+        int idade = Integer.parseInt(scanner.nextLine());
+        System.out.println("Sua idade é " + idade);
+        
+        dizerOi();
+        String retorno = retornarOi();
+        System.out.println(retorno);
+        dizerMensagem("Oi 3");
+    }
+    
+    static void dizerOi() {
+        System.out.println("Oi");
+    }
+    
+    static String retornarOi() {
+        return "Oi 2";
+    }
+    
+    static void dizerMensagem(String mensagem) {
+        System.out.println(mensagem);
     }
     
 }
