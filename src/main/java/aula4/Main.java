@@ -4,6 +4,7 @@ import aula4.loja.Filial;
 import aula4.transporte.Caminhao;
 import aula4.transporte.Motor;
 import aula4.transporte.Motorista;
+import java.util.Scanner;
 
 public class Main {
     
@@ -40,6 +41,10 @@ public class Main {
         Filial filial3 = new Filial("São Paulo");
         filial3.calcularFaturamento();
         filial3 = null;
+        
+        System.out.println("Saída");
+        System.err.println("Erro");
+        new Scanner(System.in);
     }
         
 }
