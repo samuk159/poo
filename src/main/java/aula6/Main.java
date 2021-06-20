@@ -18,6 +18,9 @@ public class Main {
         Animal animal1 = new Cachorro();
         Animal animal2 = new Gato();
         
+        cachorro = new Cachorro("Spike", "Pastor alemão", 30f);
+        gato = new Gato("Lua", "Persa", 4f);
+        
         Cliente cliente = new Cliente();
         cliente.comprar();
         Desenvolvedor desenvolvedor = new Desenvolvedor();

@@ -4,6 +4,14 @@ public class Animal {
     private String nome;
     private String raca;
     private Float peso;
+
+    public Animal() { }
+
+    public Animal(String nome, String raca, Float peso) {
+        this.nome = nome;
+        this.raca = raca;
+        this.peso = peso;
+    }   
     
     public void comer() { }
     
