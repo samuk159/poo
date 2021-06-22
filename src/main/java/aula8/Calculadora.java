@@ -42,4 +42,12 @@ public class Calculadora {
         return soma;
     }
     
+    public int dividir(int n1, int n2) throws ArithmeticException {
+        if (n2 == 0) {
+            throw new ArithmeticException("Número 2 não pode ser 0");
+        }
+        
+        return n1 / n2;
+    }
+    
 }

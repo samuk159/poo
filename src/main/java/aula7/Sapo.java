@@ -8,9 +8,9 @@ public class Sapo extends Anfibio {
     }
 
     @Override
-    public void andar() {
+    public void andar() throws AnimalNaoAndaException {
         if (girino) {
-            System.out.println("Girinos não andam");
+            throw new AnimalNaoAndaException();
         } else {
             pular();
         }

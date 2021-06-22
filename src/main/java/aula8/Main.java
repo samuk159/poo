@@ -57,6 +57,8 @@ public class Main {
         System.out.println(calculadora.somar("2", "3"));
         System.out.println(calculadora.somar(1, 2, 3));
         System.out.println(calculadora.somar(new int[] { 1, 2, 3, 4, 5 }));
+        
+        calculadora.dividir(2, 0);
     }
     
 }

@@ -1,5 +1,8 @@
 package aula7;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -25,6 +28,16 @@ public class Main {
         System.out.println("Área retangulo: " + retangulo.getArea());
         System.out.println("Área quadrado: " + quadrado.getArea());
         System.out.println("Área triangulo: " + triangulo.getArea());
+        
+        try {
+            Anfibio sapo = new Sapo(false);
+            sapo.andar();
+            Anfibio girino = new Sapo(true);
+            girino.andar();
+        } catch (AnimalNaoAndaException e) {
+            System.err.println("O animal não anda");
+            e.printStackTrace();
+        }
     }
     
 }
