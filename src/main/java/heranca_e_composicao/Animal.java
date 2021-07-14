@@ -1,6 +1,6 @@
 package heranca_e_composicao;
 
-public class Animal {
+public /*final*/ class Animal {
     private String nome;
     private String raca;
     private Float peso;
