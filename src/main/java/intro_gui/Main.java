@@ -11,6 +11,6 @@ import javax.swing.JFrame;
 public class Main {
     public static void main(String[] args) {
         //JFrame tela = new MinhaTela();        
-        JFrame tela = new Tela2();        
+        JFrame tela = new Tela2();  
     }
 }
