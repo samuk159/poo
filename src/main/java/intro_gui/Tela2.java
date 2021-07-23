@@ -6,6 +6,7 @@
 package intro_gui;
 
 import javax.swing.JOptionPane;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -19,6 +20,8 @@ public class Tela2 extends javax.swing.JFrame {
     public Tela2() {
         initComponents();
         setVisible(true);
+        /*NumberFormatter formatter = (NumberFormatter) campoIdade.getFormatter();
+        formatter.setAllowsInvalid(false);*/
     }
 
     /**
@@ -34,7 +37,7 @@ public class Tela2 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         campoNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        campoIdade = new javax.swing.JTextField();
+        campoIdade = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,25 +54,27 @@ public class Tela2 extends javax.swing.JFrame {
 
         jLabel2.setText("Idade");
 
+        campoIdade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoIdade, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
-                            .addComponent(campoIdade)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
@@ -81,9 +86,9 @@ public class Tela2 extends javax.swing.JFrame {
                 .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -95,8 +100,15 @@ public class Tela2 extends javax.swing.JFrame {
         String nome = campoNome.getText();
         System.out.println("Seu nome é: " + nome);
         
-        int idade = Integer.parseInt(campoIdade.getText());
-        System.out.println("Idade: " + idade);
+        try {
+            int idade = Integer.parseInt(
+                campoIdade.getText().replace(".", "")
+            );
+            System.out.println("Idade: " + idade);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Idade não é um número");
+            return;
+        }
         
         JOptionPane.showMessageDialog(this, "Seu nome é: " + nome);
         JOptionPane.showMessageDialog(
@@ -151,7 +163,7 @@ public class Tela2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField campoIdade;
+    private javax.swing.JFormattedTextField campoIdade;
     private javax.swing.JTextField campoNome;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
