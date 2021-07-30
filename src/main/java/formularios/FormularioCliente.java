@@ -27,8 +27,9 @@ public class FormularioCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        groupSexo = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        campoNome = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         campoEmail = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -36,6 +37,18 @@ public class FormularioCliente extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         campoTelefone = new javax.swing.JFormattedTextField();
         campoCelular = new javax.swing.JFormattedTextField();
+        jLabel5 = new javax.swing.JLabel();
+        checkboxEmail = new javax.swing.JCheckBox();
+        checkboxSMS = new javax.swing.JCheckBox();
+        checkboxWhatsapp = new javax.swing.JCheckBox();
+        btnSalvar = new javax.swing.JButton();
+        radioMasculino = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
+        radioFeminino = new javax.swing.JRadioButton();
+        radioOutro = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        textareaObservacoes = new javax.swing.JScrollPane();
+        campoObservacoes = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,7 +93,7 @@ public class FormularioCliente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addComponent(campoCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
+                        .addComponent(campoCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -101,6 +114,38 @@ public class FormularioCliente extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        jLabel5.setText("Notificar via");
+
+        checkboxEmail.setText("Email");
+
+        checkboxSMS.setText("SMS");
+
+        checkboxWhatsapp.setText("Whatsapp");
+
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        groupSexo.add(radioMasculino);
+        radioMasculino.setText("Masculino");
+
+        jLabel6.setText("Sexo");
+
+        groupSexo.add(radioFeminino);
+        radioFeminino.setText("Feminino");
+
+        groupSexo.add(radioOutro);
+        radioOutro.setText("Outro");
+
+        jLabel7.setText("Observações");
+
+        campoObservacoes.setColumns(20);
+        campoObservacoes.setRows(5);
+        textareaObservacoes.setViewportView(campoObservacoes);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,11 +153,31 @@ public class FormularioCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
+                    .addComponent(textareaObservacoes)
+                    .addComponent(campoNome)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalvar))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(radioMasculino)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radioFeminino)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radioOutro))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(checkboxEmail)
+                                .addGap(18, 18, 18)
+                                .addComponent(checkboxSMS)
+                                .addGap(18, 18, 18)
+                                .addComponent(checkboxWhatsapp))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -121,14 +186,69 @@ public class FormularioCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkboxEmail)
+                    .addComponent(checkboxSMS)
+                    .addComponent(checkboxWhatsapp))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioMasculino)
+                    .addComponent(radioFeminino)
+                    .addComponent(radioOutro))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textareaObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSalvar)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        String nome = campoNome.getText();
+        String email = campoEmail.getText();
+        String telefone = campoTelefone.getText();
+        String celular = campoCelular.getText();
+        
+        boolean notificarEmail = checkboxEmail.isSelected();
+        boolean notificarSms = checkboxSMS.isSelected();
+        boolean notificarWhatsapp = checkboxWhatsapp.isSelected();
+        
+        String sexo = "Outro";
+        if (radioMasculino.isSelected()) {
+            sexo = "Masculino";
+        } else if (radioFeminino.isSelected()) {
+            sexo = "Feminino";
+        }
+        
+        String observacoes = campoObservacoes.getText();
+        
+        System.out.println("Nome: " + nome);
+        System.out.println("Email: " + email);
+        System.out.println("Telefone: " + telefone);
+        System.out.println("Celular: " + celular);
+        System.out.println("Sexo: " + sexo);
+        
+        System.out.println();
+        System.out.println("Notificar via");
+        System.out.println("Email: " + notificarEmail);
+        System.out.println("SMS: " + notificarSms);
+        System.out.println("Whatsapp: " + notificarWhatsapp);
+        
+        System.out.println("Observações:");
+        System.out.println(observacoes);
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,14 +286,27 @@ public class FormularioCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JFormattedTextField campoCelular;
     private javax.swing.JTextField campoEmail;
+    private javax.swing.JTextField campoNome;
+    private javax.swing.JTextArea campoObservacoes;
     private javax.swing.JFormattedTextField campoTelefone;
+    private javax.swing.JCheckBox checkboxEmail;
+    private javax.swing.JCheckBox checkboxSMS;
+    private javax.swing.JCheckBox checkboxWhatsapp;
+    private javax.swing.ButtonGroup groupSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JRadioButton radioFeminino;
+    private javax.swing.JRadioButton radioMasculino;
+    private javax.swing.JRadioButton radioOutro;
+    private javax.swing.JScrollPane textareaObservacoes;
     // End of variables declaration//GEN-END:variables
 }
