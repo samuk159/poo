@@ -5,6 +5,14 @@
  */
 package formularios;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author samuk159
@@ -49,6 +57,10 @@ public class FormularioCliente extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         textareaObservacoes = new javax.swing.JScrollPane();
         campoObservacoes = new javax.swing.JTextArea();
+        jLabel8 = new javax.swing.JLabel();
+        comboboxEstado = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        campoDataNascimento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,6 +158,19 @@ public class FormularioCliente extends javax.swing.JFrame {
         campoObservacoes.setRows(5);
         textareaObservacoes.setViewportView(campoObservacoes);
 
+        jLabel8.setText("Estado");
+
+        comboboxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PR", "SC", "RS", "SP" }));
+        comboboxEstado.setSelectedIndex(-1);
+
+        jLabel9.setText("Data de Nascimento");
+
+        try {
+            campoDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,7 +179,6 @@ public class FormularioCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textareaObservacoes)
-                    .addComponent(campoNome)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -167,7 +191,10 @@ public class FormularioCliente extends javax.swing.JFrame {
                                 .addComponent(radioFeminino)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(radioOutro))
-                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(170, 170, 170)
+                                .addComponent(jLabel9))
                             .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(checkboxEmail)
@@ -176,7 +203,13 @@ public class FormularioCliente extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(checkboxWhatsapp))
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(comboboxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(campoDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -184,9 +217,13 @@ public class FormularioCliente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,8 +243,12 @@ public class FormularioCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textareaObservacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addComponent(textareaObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboboxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalvar)
                 .addContainerGap())
         );
@@ -233,12 +274,35 @@ public class FormularioCliente extends javax.swing.JFrame {
         }
         
         String observacoes = campoObservacoes.getText();
+        int indiceEstado = comboboxEstado.getSelectedIndex();
+        String estado = (String) comboboxEstado.getSelectedItem();
+        
+        String dataN = campoDataNascimento.getText();
+        System.out.println("dataN: " + dataN);
+        System.out.println("dataN2: " + dataN.replace("/", ""));
+        System.out.println("dataN3: " + dataN.replace("/", "").length());
+        System.out.println("dataN4: " + dataN.replace("/", "").trim().length());
+        
+        if (dataN != null && !dataN.replace("/", "").trim().isEmpty()) {
+            DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            
+            try {
+                Date dataNascimento = formato.parse(dataN);
+                System.out.println("Data de Nascimento: " + dataNascimento);
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(
+                    this, "Houve um erro ao ler a data de nascimento: " + ex.getMessage()
+                );
+            }
+        }
         
         System.out.println("Nome: " + nome);
         System.out.println("Email: " + email);
         System.out.println("Telefone: " + telefone);
         System.out.println("Celular: " + celular);
         System.out.println("Sexo: " + sexo);
+        System.out.println("Estado: " + indiceEstado + " - " + estado);
         
         System.out.println();
         System.out.println("Notificar via");
@@ -288,6 +352,7 @@ public class FormularioCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
     private javax.swing.JFormattedTextField campoCelular;
+    private javax.swing.JFormattedTextField campoDataNascimento;
     private javax.swing.JTextField campoEmail;
     private javax.swing.JTextField campoNome;
     private javax.swing.JTextArea campoObservacoes;
@@ -295,6 +360,7 @@ public class FormularioCliente extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkboxEmail;
     private javax.swing.JCheckBox checkboxSMS;
     private javax.swing.JCheckBox checkboxWhatsapp;
+    private javax.swing.JComboBox<String> comboboxEstado;
     private javax.swing.ButtonGroup groupSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -303,6 +369,8 @@ public class FormularioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton radioFeminino;
     private javax.swing.JRadioButton radioMasculino;
