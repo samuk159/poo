@@ -5,6 +5,8 @@
  */
 package formularios;
 
+import java.awt.FileDialog;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,6 +63,7 @@ public class FormularioCliente extends javax.swing.JFrame {
         comboboxEstado = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         campoDataNascimento = new javax.swing.JFormattedTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,6 +174,13 @@ public class FormularioCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        jButton1.setText("Anexar arquivo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,6 +192,8 @@ public class FormularioCliente extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSalvar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,7 +261,9 @@ public class FormularioCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(comboboxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -314,6 +328,26 @@ public class FormularioCliente extends javax.swing.JFrame {
         System.out.println(observacoes);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        FileDialog seletorArquivo = new FileDialog(
+            this, "Selecione um arquivo", FileDialog.LOAD
+        );
+        seletorArquivo.setVisible(true);
+        
+        String diretorio = seletorArquivo.getDirectory();
+        String arquivo = seletorArquivo.getFile();
+        
+        System.out.println("Diretório: " + diretorio);
+        System.out.println("Arquivo: " + arquivo);
+        
+        if (arquivo != null) {
+            File file = new File(diretorio + arquivo);
+            JOptionPane.showMessageDialog(this, "Arquivo selecionado: " + file);
+        } else {
+            JOptionPane.showMessageDialog(this, "Nenhum arquivo selecionado");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -362,6 +396,7 @@ public class FormularioCliente extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkboxWhatsapp;
     private javax.swing.JComboBox<String> comboboxEstado;
     private javax.swing.ButtonGroup groupSexo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
