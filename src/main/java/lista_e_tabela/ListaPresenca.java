@@ -25,6 +25,11 @@ public class ListaPresenca extends javax.swing.JFrame {
         //listaPresenca.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         listModel.addElement("João");
         listModel.addElement("Maria");
+        
+        /*for (int i = 0; i < 20; i++) {
+            listModel.addElement("Teste " + i);
+        }*/
+        
         botaoRemover.setEnabled(false);
     }
 
