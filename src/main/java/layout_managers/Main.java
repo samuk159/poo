@@ -19,7 +19,7 @@ public class Main {
         //JFrame tela = new ExemploBorderLayout();
         //JFrame tela = new ExemploBoxLayout();
         //JFrame tela = new ExemploGridLayout();
-        JFrame tela = new Calculadora();
+        JFrame tela = new JogoDaVelha();
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tela.setVisible(true);
     }
