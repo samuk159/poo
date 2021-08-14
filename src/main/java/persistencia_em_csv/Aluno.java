@@ -10,17 +10,19 @@ package persistencia_em_csv;
  *
  * @author samuk159
  */
-public class Cliente {
+public class Aluno {
     private String nome;
     private String telefone;
     private Long cpf;
+    private Integer periodo;
 
-    public Cliente() {}
+    public Aluno() {}
 
-    public Cliente(String nome, String telefone, Long cpf) {
+    public Aluno(String nome, String telefone, Long cpf, Integer periodo) {
         this.nome = nome;
         this.telefone = telefone;
         this.cpf = cpf;
+        this.periodo = periodo;
     }
 
     //getters e setters
@@ -47,5 +49,13 @@ public class Cliente {
 
     public void setCpf(Long cpf) {
         this.cpf = cpf;
+    }
+
+    public Integer getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(Integer periodo) {
+        this.periodo = periodo;
     }
 }

@@ -17,45 +17,51 @@ import org.apache.commons.io.FileUtils;
  *
  * @author samuk159
  */
-public class ClienteDAO {
+public class AlunoDAO {
     
-    private File arquivo = new File("dados/clientes.csv");
-    private List<Cliente> clientes;
+    private File arquivo = new File("dados/alunos.csv");
+    private List<Aluno> alunos;
 
-    public List<Cliente> ler() throws IOException {
-        if (clientes == null) {
+    public List<Aluno> ler() throws IOException {
+        if (alunos == null) {
             List<String> linhas = Files.readAllLines(arquivo.toPath());
-            clientes = new ArrayList<>();
+            alunos = new ArrayList<>();
 
             for (String linha : linhas) {
                 if (!linha.trim().isEmpty()) {
                     String[] colunas = linha.split(",");
 
-                    Cliente c = new Cliente();
-                    c.setNome(colunas[0]);
-                    c.setTelefone(colunas[1]);
-                    c.setCpf(Long.parseLong(colunas[2]));
+                    Aluno a = new Aluno();
+                    a.setNome(colunas[0]);
+                    a.setTelefone(colunas[1]);
+                    a.setCpf(Long.parseLong(colunas[2]));
+                    a.setPeriodo(Integer.parseInt(colunas[3]));
 
-                    clientes.add(c);
+                    alunos.add(a);
                 }
             }
         }
         
-        return clientes;
+        return alunos;
     }
     
-    public Cliente salvar(Cliente c) throws IOException {
+    public Aluno salvar(Aluno a) throws IOException {
         ler();
-        clientes.add(c);
+        alunos.add(a);
         salvarArquivo();
-        return c;
+        return a;
     }
     
     private void salvarArquivo() throws IOException {
         String texto = "";
         
-        for (Cliente c : clientes) {
-            String[] colunas = { c.getNome(), c.getTelefone(), String.valueOf(c.getCpf()) };
+        for (Aluno a : alunos) {
+            String[] colunas = { 
+                a.getNome(), 
+                a.getTelefone(), 
+                String.valueOf(a.getCpf()), 
+                String.valueOf(a.getPeriodo()) 
+            };
             String linha = String.join(",", colunas);
             texto += linha + "\n";
         }

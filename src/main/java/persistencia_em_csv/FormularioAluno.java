@@ -15,12 +15,12 @@ import javax.swing.text.MaskFormatter;
  *
  * @author samuk159
  */
-public class FormularioCliente extends javax.swing.JFrame {
+public class FormularioAluno extends javax.swing.JFrame {
 
     /**
      * Creates new form FormularioCliente
      */
-    public FormularioCliente() {
+    public FormularioAluno() {
         initComponents();
     }
 
@@ -40,6 +40,8 @@ public class FormularioCliente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         campoCPF = new javax.swing.JFormattedTextField();
         btnSalvar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        campoPeriodo = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +70,8 @@ public class FormularioCliente extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Período");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,18 +79,20 @@ public class FormularioCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoPeriodo)
                     .addComponent(campoNome)
                     .addComponent(campoTelefone)
+                    .addComponent(campoCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalvar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(campoCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSalvar)))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -104,9 +110,13 @@ public class FormularioCliente extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(btnSalvar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -114,9 +124,10 @@ public class FormularioCliente extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            Cliente c = new Cliente();
-            c.setNome(campoNome.getText());
-            c.setTelefone(campoTelefone.getText());
+            Aluno a = new Aluno();
+            a.setNome(campoNome.getText());
+            a.setTelefone(campoTelefone.getText());
+            a.setPeriodo((Integer) campoPeriodo.getValue());
 
             String cpf = (String) campoCPF.getValue();
             System.out.println(cpf);
@@ -124,11 +135,15 @@ public class FormularioCliente extends javax.swing.JFrame {
                 MaskFormatter formatador = new MaskFormatter("###.###.###-##");
                 formatador.setValueContainsLiteralCharacters(false);
                 cpf = (String) formatador.stringToValue(cpf);
-                c.setCpf(Long.parseLong(cpf));
+                a.setCpf(Long.parseLong(cpf));
             }
+            
+            /*if (campoPeriodo.getValue() != null) {
+                
+            }*/
 
-            ClienteDAO dao = new ClienteDAO();
-            dao.salvar(c);
+            AlunoDAO dao = new AlunoDAO();
+            dao.salvar(a);
             JOptionPane.showMessageDialog(this, "Salvo com sucesso");
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,20 +168,21 @@ public class FormularioCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormularioCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormularioCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormularioCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormularioCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormularioCliente().setVisible(true);
+                new FormularioAluno().setVisible(true);
             }
         });
     }
@@ -175,9 +191,11 @@ public class FormularioCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JFormattedTextField campoCPF;
     private javax.swing.JTextField campoNome;
+    private javax.swing.JSpinner campoPeriodo;
     private javax.swing.JFormattedTextField campoTelefone;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

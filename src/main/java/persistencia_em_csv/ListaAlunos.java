@@ -17,26 +17,27 @@ import javax.swing.text.MaskFormatter;
  *
  * @author samuk159
  */
-public class ListaClientes extends javax.swing.JFrame {
+public class ListaAlunos extends javax.swing.JFrame {
     
     /**
      * Creates new form ListaClientes
      */
-    public ListaClientes() {
+    public ListaAlunos() {
         initComponents();
         try {
-            ClienteDAO dao = new ClienteDAO();
-            List<Cliente> clientes = dao.ler();
+            AlunoDAO dao = new AlunoDAO();
+            List<Aluno> alunos = dao.ler();
             DefaultTableModel model = (DefaultTableModel) tabela.getModel();
             
-            for (Cliente c : clientes) {
-                String[] linha = new String[3];
-                linha[0] = c.getNome();
-                linha[1] = c.getTelefone();
+            for (Aluno a : alunos) {
+                String[] linha = new String[4];
+                linha[0] = a.getNome();
+                linha[1] = a.getTelefone();
                 
                 MaskFormatter formatador = new MaskFormatter("###.###.###-##");
                 formatador.setValueContainsLiteralCharacters(false);
-                linha[2] = formatador.valueToString(c.getCpf());
+                linha[2] = formatador.valueToString(a.getCpf());
+                linha[3] = String.valueOf(a.getPeriodo());
                 
                 model.addRow(linha);
             }
@@ -65,14 +66,14 @@ public class ListaClientes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Telefone", "CPF"
+                "Nome", "Telefone", "CPF", "Período"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -89,7 +90,9 @@ public class ListaClientes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,20 +119,21 @@ public class ListaClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaAlunos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaAlunos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaAlunos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaAlunos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListaClientes().setVisible(true);
+                new ListaAlunos().setVisible(true);
             }
         });
     }
