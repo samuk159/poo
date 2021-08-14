@@ -28,12 +28,12 @@ public class TesteCSV {
             System.out.println(colunas[2]);
         }*/
         
-        /*ClienteDAO dao = new ClienteDAO();
-        List<Cliente> clientes = dao.ler();
-        Cliente novoCliente = new Cliente(
-            "Lucas", "(35) 4 4444-4444", 444_444_444_44l
+        /*AlunoDAO dao = new AlunoDAO();
+        List<Aluno> alunos = dao.ler();
+        Aluno novoAluno = new Aluno(
+            "Lucas", "(35) 4 4444-4444", 444_444_444_44l, 2
         );
-        clientes.add(novoCliente);
+        alunos.add(novoAluno);
         dao.salvarArquivo();*/
     }    
 }

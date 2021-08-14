@@ -5,9 +5,6 @@
  */
 package persistencia_em_csv;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
@@ -17,12 +14,27 @@ import javax.swing.text.MaskFormatter;
  */
 public class FormularioAluno extends javax.swing.JFrame {
 
+    private int indice = -1;
+    private Aluno aluno = new Aluno();
+    
     /**
      * Creates new form FormularioCliente
      */
     public FormularioAluno() {
         initComponents();
     }
+    
+    public FormularioAluno(int indice, Aluno aluno) {
+        this();
+        this.indice = indice;
+        this.aluno = aluno;
+        
+        campoNome.setText(aluno.getNome());
+        campoTelefone.setText(aluno.getTelefone());
+        campoCPF.setText(String.valueOf(aluno.getCpf()));
+        campoPeriodo.setValue(aluno.getPeriodo());
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,10 +136,9 @@ public class FormularioAluno extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            Aluno a = new Aluno();
-            a.setNome(campoNome.getText());
-            a.setTelefone(campoTelefone.getText());
-            a.setPeriodo((Integer) campoPeriodo.getValue());
+            aluno.setNome(campoNome.getText());
+            aluno.setTelefone(campoTelefone.getText());
+            aluno.setPeriodo((Integer) campoPeriodo.getValue());
 
             String cpf = (String) campoCPF.getValue();
             System.out.println(cpf);
@@ -135,16 +146,18 @@ public class FormularioAluno extends javax.swing.JFrame {
                 MaskFormatter formatador = new MaskFormatter("###.###.###-##");
                 formatador.setValueContainsLiteralCharacters(false);
                 cpf = (String) formatador.stringToValue(cpf);
-                a.setCpf(Long.parseLong(cpf));
+                aluno.setCpf(Long.parseLong(cpf));
             }
-            
-            /*if (campoPeriodo.getValue() != null) {
-                
-            }*/
 
             AlunoDAO dao = new AlunoDAO();
-            dao.salvar(a);
+            if (indice > -1) {
+                dao.atualizar(indice, aluno);
+            } else {
+                dao.adicionar(aluno);
+            }
             JOptionPane.showMessageDialog(this, "Salvo com sucesso");
+            new ListaAlunos().setVisible(true);
+            dispose();
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Ocorreu um erro: " + e.getMessage());

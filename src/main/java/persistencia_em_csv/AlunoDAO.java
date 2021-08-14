@@ -45,11 +45,24 @@ public class AlunoDAO {
         return alunos;
     }
     
-    public Aluno salvar(Aluno a) throws IOException {
+    public Aluno adicionar(Aluno a) throws IOException {
         ler();
         alunos.add(a);
         salvarArquivo();
         return a;
+    }
+    
+    public Aluno atualizar(int indice, Aluno a) throws IOException {
+        ler();
+        alunos.set(indice, a);
+        salvarArquivo();
+        return a;
+    }
+    
+    public void remover(int indice) throws IOException {
+        ler();
+        alunos.remove(indice);
+        salvarArquivo();
     }
     
     private void salvarArquivo() throws IOException {
