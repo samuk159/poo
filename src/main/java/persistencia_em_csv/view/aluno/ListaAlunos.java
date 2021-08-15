@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia_em_csv.view;
+package persistencia_em_csv.view.aluno;
 
 import persistencia_em_csv.dao.AlunoDAO;
 import persistencia_em_csv.model.Aluno;

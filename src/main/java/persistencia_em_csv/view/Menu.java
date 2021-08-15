@@ -5,6 +5,7 @@
  */
 package persistencia_em_csv.view;
 
+import persistencia_em_csv.view.aluno.ListaAlunos;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.logging.Level;
