@@ -6,6 +6,8 @@
 
 package persistencia_em_csv.model;
 
+import excecoes.Turno;
+
 /**
  *
  * @author samuk159
@@ -13,6 +15,7 @@ package persistencia_em_csv.model;
 public class Curso extends BaseModel {
     private String nome;
     private Integer duracao;
+    private Turno turno;
     
     //getters e setters
 
@@ -30,5 +33,13 @@ public class Curso extends BaseModel {
 
     public void setDuracao(Integer duracao) {
         this.duracao = duracao;
+    }
+
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
     }
 }
