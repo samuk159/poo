@@ -24,8 +24,6 @@ import javax.swing.SwingWorker;
 public class Menu extends javax.swing.JFrame {
 
     private JPanel panel = new JPanel(new BorderLayout());
-    private JLabel teste1 = new JLabel("Teste1");
-    private JLabel teste2 = new JLabel("Teste2");
     
     /**
      * Creates new form Menu
@@ -35,7 +33,7 @@ public class Menu extends javax.swing.JFrame {
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         //setLayout(new BorderLayout());
         //panel.setSize(100, 100);
-        panel.add(teste1, BorderLayout.CENTER);
+        //panel.add(teste1, BorderLayout.CENTER);
         //panel.setLayout(null);
         /*this.setSize(300, 300);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -169,10 +167,10 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        //JPanel p = new Configuracoes();
-        JPanel p = new JPanel();
-        p.setBackground(Color.red);
-        p.add(teste2);
+        JPanel p = new Configuracoes();
+        //JPanel p = new JPanel();
+        //p.setBackground(Color.red);
+        //p.add(teste2);
         //p.setPreferredSize(getPreferredSize());
         //p.setPreferredSize(null);
         //p.setLayout(null);
@@ -180,7 +178,7 @@ public class Menu extends javax.swing.JFrame {
         /*p.setVisible(true);
         getContentPane().add(p);
         pack();*/
-        System.out.println("asdasdasdasddasdas");
+        //System.out.println("asdasdasdasddasdas");
         //setPanel(new Configuracoes());
         //removeAll();
         //getContentPane().add(new JButton("Clique aqui"));
