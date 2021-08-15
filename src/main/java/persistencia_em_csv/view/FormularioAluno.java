@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia_em_csv;
+package persistencia_em_csv.view;
 
+import persistencia_em_csv.dao.AlunoDAO;
+import persistencia_em_csv.model.Aluno;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package persistencia_em_csv;
+package persistencia_em_csv.model;
 
 /**
  *

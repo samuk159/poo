@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package persistencia_em_csv;
+package persistencia_em_csv.dao;
 
+import persistencia_em_csv.model.Aluno;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
