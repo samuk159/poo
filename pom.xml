@@ -11,6 +11,30 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        
+        <finalName>POO</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>persistencia_em_csv.FormularioAluno</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+     </build>
+    
     <dependencies>
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
