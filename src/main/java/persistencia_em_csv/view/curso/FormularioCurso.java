@@ -45,6 +45,10 @@ public class FormularioCurso extends javax.swing.JFrame {
         if (curso.getDuracao()!= null) {
             campoDuracao.setValue(curso.getDuracao());
         }
+        
+        if (curso.getTurno() != null) {
+            campoTurno.setSelectedItem(curso.getTurno().getDescricao());
+        }
     }
     
 
