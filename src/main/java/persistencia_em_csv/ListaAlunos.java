@@ -23,7 +23,7 @@ import javax.swing.text.MaskFormatter;
  *
  * @author samuk159
  */
-public class ListaAlunos extends javax.swing.JFrame {
+public class ListaAlunos extends javax.swing.JPanel {
     
     private List<Aluno> alunos;
     private AlunoDAO dao = new AlunoDAO();
@@ -90,7 +90,6 @@ public class ListaAlunos extends javax.swing.JFrame {
         campoBuscar = new javax.swing.JButton();
         barraProgresso = new javax.swing.JProgressBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -157,8 +156,8 @@ public class ListaAlunos extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -195,8 +194,6 @@ public class ListaAlunos extends javax.swing.JFrame {
                 .addComponent(barraProgresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -205,7 +202,6 @@ public class ListaAlunos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new FormularioAluno().setVisible(true);
-        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
@@ -213,7 +209,6 @@ public class ListaAlunos extends javax.swing.JFrame {
             int indiceSelecionado = tabela.getSelectedRow();
             Aluno aluno = alunos.get(indiceSelecionado);
             new FormularioAluno(aluno).setVisible(true);
-            dispose();
         }
     }//GEN-LAST:event_tabelaMouseClicked
 

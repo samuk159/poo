@@ -167,7 +167,6 @@ public class FormularioAluno extends javax.swing.JFrame {
             AlunoDAO dao = new AlunoDAO();
             dao.salvar(aluno);
             JOptionPane.showMessageDialog(this, "Salvo com sucesso");
-            new ListaAlunos().setVisible(true);
             dispose();
         } catch (Exception e) {
             e.printStackTrace();
