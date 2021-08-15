@@ -29,6 +29,8 @@ public class Configuracoes extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 0, 0));
+
         jLabel1.setText("Configuracoes");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

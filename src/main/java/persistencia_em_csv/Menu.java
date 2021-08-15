@@ -5,8 +5,11 @@
  */
 package persistencia_em_csv;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +23,7 @@ import javax.swing.SwingWorker;
  */
 public class Menu extends javax.swing.JFrame {
 
-    private JPanel panel = new JPanel();
+    private JPanel panel = new JPanel(new BorderLayout());
     private JLabel teste1 = new JLabel("Teste1");
     private JLabel teste2 = new JLabel("Teste2");
     
@@ -29,8 +32,10 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {  
         initComponents();
-        panel.setSize(100, 100);
-        panel.add(teste1);
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        //setLayout(new BorderLayout());
+        //panel.setSize(100, 100);
+        panel.add(teste1, BorderLayout.CENTER);
         //panel.setLayout(null);
         /*this.setSize(300, 300);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -164,10 +169,15 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        /*JPanel p = new Configuracoes();
-        p.setLayout(null);
-        p.setSize(100, 100);
-        p.setVisible(true);
+        //JPanel p = new Configuracoes();
+        JPanel p = new JPanel();
+        p.setBackground(Color.red);
+        p.add(teste2);
+        //p.setPreferredSize(getPreferredSize());
+        //p.setPreferredSize(null);
+        //p.setLayout(null);
+        //p.setSize(100, 100);
+        /*p.setVisible(true);
         getContentPane().add(p);
         pack();*/
         System.out.println("asdasdasdasddasdas");
@@ -177,8 +187,10 @@ public class Menu extends javax.swing.JFrame {
         //revalidate();
         //repaint();
         
+        panel.removeAll();
         //panel.remove(teste1);
-        panel.add(teste2);
+        //panel.add(teste2);
+        panel.add(p, BorderLayout.CENTER);
         validate();
         //pack();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
