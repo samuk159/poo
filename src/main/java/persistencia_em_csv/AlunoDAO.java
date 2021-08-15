@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JProgressBar;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -22,9 +25,11 @@ public class AlunoDAO {
     private File arquivo = new File("dados/alunos.csv");
     private List<Aluno> alunos;
 
-    public List<Aluno> ler() throws IOException {
+    public List<Aluno> ler(JProgressBar barraProgresso) throws IOException {
         if (alunos == null) {
             List<String> linhas = Files.readAllLines(arquivo.toPath());
+            barraProgresso.setValue(0);
+            barraProgresso.setMaximum(linhas.size());
             alunos = new ArrayList<>();
 
             for (int i = 0; i < linhas.size(); i++) {
@@ -32,7 +37,13 @@ public class AlunoDAO {
                 
                 if (!linha.trim().isEmpty()) {
                     String[] colunas = linha.split(",");
-
+                    
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                    
                     Aluno a = new Aluno();
                     a.setId(i);
                     a.setNome(colunas[0]);
@@ -41,6 +52,7 @@ public class AlunoDAO {
                     a.setPeriodo(Integer.parseInt(colunas[3]));
 
                     alunos.add(a);
+                    barraProgresso.setValue(i + 1);
                 }
             }
         }
@@ -48,13 +60,21 @@ public class AlunoDAO {
         return alunos;
     }
     
-    public List<Aluno> buscar(String texto) throws IOException {        
+    public List<Aluno> buscar(String texto, JProgressBar barraProgresso) throws IOException {        
         if (texto == null || texto.isEmpty()) {
-            return ler();
+            return ler(null);
         } else {
+            barraProgresso.setValue(0);
+            barraProgresso.setMaximum(alunos.size());
             List<Aluno> filtrados = new ArrayList<>();
             
             for (Aluno a : alunos) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                
                 if (
                     a.getNome() != null && 
                     a.getNome().toLowerCase().contains(texto.toLowerCase())
@@ -68,15 +88,15 @@ public class AlunoDAO {
                 ) {
                     filtrados.add(a);
                 }
+                
+                barraProgresso.setValue(barraProgresso.getValue() + 1);
             }
             
             return filtrados;
         }
     }
     
-    public Aluno salvar(Aluno a) throws IOException {
-        ler();
-        
+    public Aluno salvar(Aluno a) throws IOException {        
         if (a.getId() == null) {
             alunos.add(a);
         } else {
@@ -88,7 +108,6 @@ public class AlunoDAO {
     }
     
     public void remover(Aluno a) throws IOException {
-        ler();
         alunos.remove((int) a.getId());
         salvarArquivo();
     }

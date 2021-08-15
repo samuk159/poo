@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -31,13 +33,26 @@ public class ListaAlunos extends javax.swing.JFrame {
      */
     public ListaAlunos() {
         initComponents();
-        try {
-            alunos = dao.ler();
-            atualizarTabela();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Ocorreu um erro: " + ex.getMessage());
-        }
+        
+        new SwingWorker<List<Aluno>, Void>() {
+            @Override
+            protected List<Aluno> doInBackground() throws Exception {
+                try {
+                    alunos = dao.ler(barraProgresso);
+                    atualizarTabela();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex.getMessage());
+                }
+                
+                return alunos;
+            }  
+            
+            @Override
+            public void done() {
+                barraProgresso.setVisible(false);
+            }
+        }.execute();
     }
     
     private void atualizarTabela() throws ParseException {
@@ -73,6 +88,7 @@ public class ListaAlunos extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         campoBusca = new javax.swing.JTextField();
         campoBuscar = new javax.swing.JButton();
+        barraProgresso = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -151,15 +167,15 @@ public class ListaAlunos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(barraProgresso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(campoBusca)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(campoBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(campoBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -170,11 +186,14 @@ public class ListaAlunos extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoBuscar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(campoBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(campoBusca))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(barraProgresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7))
         );
 
         pack();
@@ -234,14 +253,28 @@ public class ListaAlunos extends javax.swing.JFrame {
     }//GEN-LAST:event_campoBuscaKeyPressed
 
     private void buscar() {
-        try {
-            String filtro = campoBusca.getText();
-            alunos = dao.buscar(filtro);
-            atualizarTabela();
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Ocorreu um erro: " + e.getMessage());
-        }
+        barraProgresso.setVisible(true);
+        
+        new SwingWorker<List<Aluno>, Void>() {
+            @Override
+            protected List<Aluno> doInBackground() throws Exception {
+                try {
+                    String filtro = campoBusca.getText();
+                    alunos = dao.buscar(filtro, barraProgresso);
+                    atualizarTabela();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + e.getMessage());
+                }
+                
+                return alunos;
+            }  
+            
+            @Override
+            public void done() {
+                barraProgresso.setVisible(false);
+            }
+        }.execute();
     }
     
     /**
@@ -281,6 +314,7 @@ public class ListaAlunos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar barraProgresso;
     private javax.swing.JTextField campoBusca;
     private javax.swing.JButton campoBuscar;
     private javax.swing.JButton jButton1;
