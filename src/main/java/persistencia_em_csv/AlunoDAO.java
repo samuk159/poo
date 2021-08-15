@@ -20,8 +20,7 @@ import org.apache.commons.io.FileUtils;
  *
  * @author samuk159
  */
-public class AlunoDAO {
-    
+public class AlunoDAO {    
     private static AlunoDAO instancia;
     private File arquivo = new File("dados/alunos.csv");
     private List<Aluno> alunos;

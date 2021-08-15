@@ -208,6 +208,7 @@ public class ListaAlunos extends javax.swing.JPanel {
     private void abrirFormulario(Aluno aluno) {
         if (formulario != null) {
             JOptionPane.showMessageDialog(this, "O formulário já está aberto");
+            return;
         }
         
         formulario = new FormularioAluno(aluno);
