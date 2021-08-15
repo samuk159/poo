@@ -22,12 +22,8 @@ import javax.swing.SwingWorker;
  * @author samuk159
  */
 public class Menu extends javax.swing.JFrame {
-
     private JPanel panel = new JPanel(new BorderLayout());
-    
-    /**
-     * Creates new form Menu
-     */
+
     public Menu() {  
         initComponents();
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));

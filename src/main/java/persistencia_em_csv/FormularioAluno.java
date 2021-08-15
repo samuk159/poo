@@ -30,7 +30,10 @@ public class FormularioAluno extends javax.swing.JFrame {
         campoNome.setText(aluno.getNome());
         campoTelefone.setText(aluno.getTelefone());
         campoCPF.setText(String.valueOf(aluno.getCpf()));
-        campoPeriodo.setValue(aluno.getPeriodo());
+        
+        if (aluno.getPeriodo() != null) {
+            campoPeriodo.setValue(aluno.getPeriodo());
+        }
     }
     
 
@@ -54,7 +57,7 @@ public class FormularioAluno extends javax.swing.JFrame {
         campoPeriodo = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Nome");
 
@@ -156,7 +159,6 @@ public class FormularioAluno extends javax.swing.JFrame {
             aluno.setPeriodo((Integer) campoPeriodo.getValue());
 
             String cpf = (String) campoCPF.getValue();
-            System.out.println(cpf);
             if (cpf != null && !cpf.isEmpty()) { 
                 MaskFormatter formatador = new MaskFormatter("###.###.###-##");
                 formatador.setValueContainsLiteralCharacters(false);
@@ -164,7 +166,7 @@ public class FormularioAluno extends javax.swing.JFrame {
                 aluno.setCpf(Long.parseLong(cpf));
             }
 
-            AlunoDAO dao = new AlunoDAO();
+            AlunoDAO dao = AlunoDAO.getInstancia();
             dao.salvar(aluno);
             JOptionPane.showMessageDialog(this, "Salvo com sucesso");
             dispose();
@@ -175,7 +177,6 @@ public class FormularioAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new ListaAlunosJFrame().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

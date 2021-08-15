@@ -26,7 +26,7 @@ import javax.swing.text.MaskFormatter;
 public class ListaAlunosJFrame extends javax.swing.JFrame {
     
     private List<Aluno> alunos;
-    private AlunoDAO dao = new AlunoDAO();
+    private AlunoDAO dao/* = new AlunoDAO()*/;
     
     /**
      * Creates new form ListaClientes

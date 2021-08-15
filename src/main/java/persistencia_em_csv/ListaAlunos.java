@@ -7,6 +7,8 @@ package persistencia_em_csv;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,7 +23,8 @@ import javax.swing.text.MaskFormatter;
 public class ListaAlunos extends javax.swing.JPanel {
 
     private List<Aluno> alunos;
-    private AlunoDAO dao = new AlunoDAO();
+    private AlunoDAO dao = AlunoDAO.getInstancia();
+    private FormularioAluno formulario;
     
     /**
      * Creates new form ListaAlunos
@@ -191,17 +194,33 @@ public class ListaAlunos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new FormularioAluno().setVisible(true);
+        abrirFormulario(new Aluno());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         if (evt.getClickCount() == 2 && evt.getButton() == MouseEvent.BUTTON1) {
             int indiceSelecionado = tabela.getSelectedRow();
             Aluno aluno = alunos.get(indiceSelecionado);
-            new FormularioAluno(aluno).setVisible(true);
+            abrirFormulario(aluno);
         }
     }//GEN-LAST:event_tabelaMouseClicked
 
+    private void abrirFormulario(Aluno aluno) {
+        if (formulario != null) {
+            JOptionPane.showMessageDialog(this, "O formulário já está aberto");
+        }
+        
+        formulario = new FormularioAluno(aluno);
+        formulario.setVisible(true);
+        formulario.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                formulario = null;
+                buscar();
+            }
+        });
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int indiceSelecionado = tabela.getSelectedRow();
         if (indiceSelecionado == -1) {
