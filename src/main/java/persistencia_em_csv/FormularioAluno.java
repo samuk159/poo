@@ -14,7 +14,6 @@ import javax.swing.text.MaskFormatter;
  */
 public class FormularioAluno extends javax.swing.JFrame {
 
-    private int indice = -1;
     private Aluno aluno = new Aluno();
     
     /**
@@ -24,9 +23,8 @@ public class FormularioAluno extends javax.swing.JFrame {
         initComponents();
     }
     
-    public FormularioAluno(int indice, Aluno aluno) {
+    public FormularioAluno(Aluno aluno) {
         this();
-        this.indice = indice;
         this.aluno = aluno;
         
         campoNome.setText(aluno.getNome());
@@ -167,11 +165,7 @@ public class FormularioAluno extends javax.swing.JFrame {
             }
 
             AlunoDAO dao = new AlunoDAO();
-            if (indice > -1) {
-                dao.atualizar(indice, aluno);
-            } else {
-                dao.adicionar(aluno);
-            }
+            dao.salvar(aluno);
             JOptionPane.showMessageDialog(this, "Salvo com sucesso");
             new ListaAlunos().setVisible(true);
             dispose();

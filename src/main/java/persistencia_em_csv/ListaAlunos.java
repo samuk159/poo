@@ -5,8 +5,11 @@
  */
 package persistencia_em_csv;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,23 +33,28 @@ public class ListaAlunos extends javax.swing.JFrame {
         initComponents();
         try {
             alunos = dao.ler();
-            DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-            
-            for (Aluno a : alunos) {
-                String[] linha = new String[4];
-                linha[0] = a.getNome();
-                linha[1] = a.getTelefone();
-                
-                MaskFormatter formatador = new MaskFormatter("###.###.###-##");
-                formatador.setValueContainsLiteralCharacters(false);
-                linha[2] = formatador.valueToString(a.getCpf());
-                linha[3] = String.valueOf(a.getPeriodo());
-                
-                model.addRow(linha);
-            }
+            atualizarTabela();
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Ocorreu um erro: " + ex.getMessage());
+        }
+    }
+    
+    private void atualizarTabela() throws ParseException {
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        model.setRowCount(0);
+            
+        for (Aluno a : alunos) {
+            String[] linha = new String[4];
+            linha[0] = a.getNome();
+            linha[1] = a.getTelefone();
+
+            MaskFormatter formatador = new MaskFormatter("###.###.###-##");
+            formatador.setValueContainsLiteralCharacters(false);
+            linha[2] = formatador.valueToString(a.getCpf());
+            linha[3] = String.valueOf(a.getPeriodo());
+
+            model.addRow(linha);
         }
     }
 
@@ -63,6 +71,8 @@ public class ListaAlunos extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        campoBusca = new javax.swing.JTextField();
+        campoBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -117,6 +127,20 @@ public class ListaAlunos extends javax.swing.JFrame {
             }
         });
 
+        campoBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoBuscaKeyPressed(evt);
+            }
+        });
+
+        campoBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/buscar.png"))); // NOI18N
+        campoBuscar.setText("Buscar");
+        campoBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,9 +150,16 @@ public class ListaAlunos extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(campoBusca)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(campoBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -138,8 +169,12 @@ public class ListaAlunos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoBuscar)
+                    .addComponent(campoBusca))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -158,7 +193,7 @@ public class ListaAlunos extends javax.swing.JFrame {
         if (evt.getClickCount() == 2 && evt.getButton() == MouseEvent.BUTTON1) {
             int indiceSelecionado = tabela.getSelectedRow();
             Aluno aluno = alunos.get(indiceSelecionado);
-            new FormularioAluno(indiceSelecionado, aluno).setVisible(true);
+            new FormularioAluno(aluno).setVisible(true);
             dispose();
         }
     }//GEN-LAST:event_tabelaMouseClicked
@@ -178,7 +213,7 @@ public class ListaAlunos extends javax.swing.JFrame {
         
         if (resposta == 0) {
             try {
-                dao.remover(indiceSelecionado);
+                dao.remover(aluno);
                 DefaultTableModel model = (DefaultTableModel) tabela.getModel();
                 model.removeRow(indiceSelecionado);
             } catch (Exception e) {
@@ -188,6 +223,27 @@ public class ListaAlunos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void campoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscarActionPerformed
+        buscar();
+    }//GEN-LAST:event_campoBuscarActionPerformed
+
+    private void campoBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            buscar();
+        }
+    }//GEN-LAST:event_campoBuscaKeyPressed
+
+    private void buscar() {
+        try {
+            String filtro = campoBusca.getText();
+            alunos = dao.buscar(filtro);
+            atualizarTabela();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Ocorreu um erro: " + e.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -225,6 +281,8 @@ public class ListaAlunos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField campoBusca;
+    private javax.swing.JButton campoBuscar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;

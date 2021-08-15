@@ -27,11 +27,14 @@ public class AlunoDAO {
             List<String> linhas = Files.readAllLines(arquivo.toPath());
             alunos = new ArrayList<>();
 
-            for (String linha : linhas) {
+            for (int i = 0; i < linhas.size(); i++) {
+                String linha = linhas.get(i);
+                
                 if (!linha.trim().isEmpty()) {
                     String[] colunas = linha.split(",");
 
                     Aluno a = new Aluno();
+                    a.setId(i);
                     a.setNome(colunas[0]);
                     a.setTelefone(colunas[1]);
                     a.setCpf(Long.parseLong(colunas[2]));
@@ -45,23 +48,48 @@ public class AlunoDAO {
         return alunos;
     }
     
-    public Aluno adicionar(Aluno a) throws IOException {
+    public List<Aluno> buscar(String texto) throws IOException {        
+        if (texto == null || texto.isEmpty()) {
+            return ler();
+        } else {
+            List<Aluno> filtrados = new ArrayList<>();
+            
+            for (Aluno a : alunos) {
+                if (
+                    a.getNome() != null && 
+                    a.getNome().toLowerCase().contains(texto.toLowerCase())
+                ) {
+                    filtrados.add(a);
+                } else if (
+                    a.getCpf() != null && 
+                    a.getCpf().toString().equals(
+                        texto.replace(".", "").replace("-", "")
+                    )
+                ) {
+                    filtrados.add(a);
+                }
+            }
+            
+            return filtrados;
+        }
+    }
+    
+    public Aluno salvar(Aluno a) throws IOException {
         ler();
-        alunos.add(a);
+        
+        if (a.getId() == null) {
+            alunos.add(a);
+        } else {
+            alunos.set(a.getId(), a);
+        }
+        
         salvarArquivo();
         return a;
     }
     
-    public Aluno atualizar(int indice, Aluno a) throws IOException {
+    public void remover(Aluno a) throws IOException {
         ler();
-        alunos.set(indice, a);
-        salvarArquivo();
-        return a;
-    }
-    
-    public void remover(int indice) throws IOException {
-        ler();
-        alunos.remove(indice);
+        alunos.remove((int) a.getId());
         salvarArquivo();
     }
     
