@@ -39,7 +39,7 @@ public class AlunoDAO {
                     String[] colunas = linha.split(",");
                     
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
@@ -70,7 +70,7 @@ public class AlunoDAO {
             
             for (Aluno a : alunos) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }

@@ -31,61 +31,8 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {  
         initComponents();
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        //setLayout(new BorderLayout());
-        //panel.setSize(100, 100);
-        //panel.add(teste1, BorderLayout.CENTER);
-        //panel.setLayout(null);
-        /*this.setSize(300, 300);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);*/
         this.add(panel);
-        /*JPanel panel = new JPanel();  */
-        /*panel.setSize(100, 100);
-        panel.add(new JLabel("Olá!"));*/
-        //panel.add(new JButton("Clique aqui"));
-        //this.add(panel);
-        //setPanel(panel);
-        
-        /*new SwingWorker<Void, Void>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                System.out.println("asdsadsad");
-                
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        System.out.println("ertettt");
-                        removeAll();
-                        getContentPane().add(new JButton("Clique aqui"));
-                        panel.add(new JButton("Clique aqui"));
-                        panel.repaint();
-                        panel.revalidate();
-                        repaint();
-                        revalidate();
-                    }
-                });
-                //repaint();
-                return null;
-            }
-        }.execute();*/
     }
-    
-    /*private void setPanel(JPanel p) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                panel.removeAll();
-                panel.add(p);
-                //panel = p;
-                repaint();
-                revalidate();
-            }
-        });
-        //this.add(panel);
-    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,27 +45,17 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/aluno.png"))); // NOI18N
-        jMenu1.setText("Alunos");
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/lista.png"))); // NOI18N
+        jMenu1.setText("Cadastros");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/add.png"))); // NOI18N
-        jMenuItem1.setText("Novo aluno");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/lista.png"))); // NOI18N
-        jMenuItem2.setText("Listar alunos");
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/aluno.png"))); // NOI18N
+        jMenuItem2.setText("Alunos");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -157,42 +94,20 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new FormularioAluno().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        /*panel = new ListaAlunos();
-        panel.setVisible(true);*/
+        trocarPanel(new ListaAlunos());
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        JPanel p = new Configuracoes();
-        //JPanel p = new JPanel();
-        //p.setBackground(Color.red);
-        //p.add(teste2);
-        //p.setPreferredSize(getPreferredSize());
-        //p.setPreferredSize(null);
-        //p.setLayout(null);
-        //p.setSize(100, 100);
-        /*p.setVisible(true);
-        getContentPane().add(p);
-        pack();*/
-        //System.out.println("asdasdasdasddasdas");
-        //setPanel(new Configuracoes());
-        //removeAll();
-        //getContentPane().add(new JButton("Clique aqui"));
-        //revalidate();
-        //repaint();
-        
-        panel.removeAll();
-        //panel.remove(teste1);
-        //panel.add(teste2);
-        panel.add(p, BorderLayout.CENTER);
-        validate();
-        //pack();
+        trocarPanel(new Configuracoes());
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void trocarPanel(JPanel p) {
+        panel.removeAll();
+        panel.add(p, BorderLayout.CENTER);
+        validate();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -232,7 +147,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables

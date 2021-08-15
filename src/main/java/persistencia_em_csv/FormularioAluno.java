@@ -175,7 +175,7 @@ public class FormularioAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new ListaAlunos().setVisible(true);
+        new ListaAlunosJFrame().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
