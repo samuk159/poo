@@ -14,6 +14,12 @@ import java.util.Scanner;
 public class Aula2 {
     
     public static void main(String[] args) {
+        IO.log("Olá mundo");
+        String nome2 = IO.ler("Qual seu nome?");
+        IO.log("Olá " + nome2);
+        int idade2 = IO.lerInt("Qual sua idade?");
+        IO.log(idade2);        
+        
         //sout + espaço + enter
         System.out.println("Isso é uma mensagem");        
         System.out.println("Tipos em Java: ");
@@ -158,6 +164,31 @@ public class Aula2 {
     
     static void dizerMensagem(String mensagem) {
         System.out.println(mensagem);
+    }
+    
+    static class IO {
+        
+        static void log(Object msg) {
+            System.out.println(msg);
+        }
+        
+        static String ler(String msg) {
+            return scanner(msg).nextLine();
+        }
+        
+        static int lerInt(String msg) {
+            return scanner(msg).nextInt();
+        }
+        
+        static double lerDouble(String msg) {
+            return scanner(msg).nextDouble();
+        }
+        
+        private static java.util.Scanner scanner(String msg) {
+            log(msg);
+            return new java.util.Scanner(System.in);
+        }
+        
     }
     
 }

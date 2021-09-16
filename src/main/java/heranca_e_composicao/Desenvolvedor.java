@@ -1,7 +1,7 @@
 package heranca_e_composicao;
 
 public class Desenvolvedor extends Funcionario {
-    private Computador computador;
+    Computador computador;
     
     public void programar() {}
     

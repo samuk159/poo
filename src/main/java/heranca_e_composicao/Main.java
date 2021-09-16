@@ -36,10 +36,18 @@ public class Main {
         Pessoa p3 = vendedor;
         
         Computador computador = new Computador();
-        computador.setProcessador("i5");
-        computador.setMemoriaRAM(16f);
+        computador.setProcessador("i3");
+        computador.setMemoriaRAM(4f);
         
-        desenvolvedor.setComputador(computador);
+        //desenvolvedor.setComputador(computador);
+        desenvolvedor.computador = computador;
+        
+        Computador c2 = new Computador();
+        c2.setProcessador("i7");
+        c2.setMemoriaRAM(16f);
+        
+        desenvolvedor.computador = c2;
+        
         desenvolvedor.getComputador().ligar();
         
         vendedor.setClientes(new Cliente[3]);
